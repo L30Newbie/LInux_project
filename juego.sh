@@ -1,127 +1,171 @@
 #!/bin/bash
 
-# Definición de las listas de palabras por categoría
-declare -A categorias
-categorias["colores"]="rojo verde azul amarillo naranja rosa morado blanco negro"
-categorias["paises"]="estadosunidos canada mexico argentina alemania francia china japon"
-categorias["comida"]="pizza hamburguesa sushi espagueti ensalada tacos burritos"
-categorias["artistas"]="leonardodavinci picasso mozart shakespeare beyonce elvispresley madonna"
-categorias["josejose"]="eltriste lamujerquesoñe lagotafría amnesia alméncemeperdona"
+# Colores
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
 
-# Elegir una categoría al azar
-categorias_keys=("${!categorias[@]}")
-categoria_indice=$((RANDOM % ${#categorias_keys[@]}))
-categoria=${categorias_keys[$categoria_indice]}
-
-# Elegir una palabra al azar de la categoría seleccionada
-palabras=(${categorias[$categoria]})
-indice=$((RANDOM % ${#palabras[@]}))
-palabra=${palabras[$indice]}
-
-# Inicializar las variables
-intentos=0
-max_intentos=6
-palabra_adivinada=""
-letras_erroneas=""
-
-# Función para mostrar el estado actual del juego
-mostrar_estado() {
+# Función para mostrar el ahorcado
+function mostrar_ahorcado {
+    caso_ahorcado=$1
     clear
-    echo "Ahorcado - Adivina la palabra (Categoría: $categoria)"
-    echo "Palabra: $palabra_adivinada"
-    echo "Letras incorrectas: $letras_erroneas"
-    echo "Intentos restantes: $((max_intentos - intentos))"
-    echo -e "\nMuñeco:"
-    
-    case $intentos in
+    echo -e "${BLUE}Ahorcado:${NC}"
+    case $caso_ahorcado in
         0)
-            echo "  ________     "
-            echo " |        |    "
-            echo " |             "
-            echo " |             "
-            echo " |             "
-            echo " |             "
+            echo "  ___________"
+            echo "  |         |"
+            echo "            |"
+            echo "            |"
+            echo "            |"
+            echo "            |"
+            echo "            |"
             ;;
         1)
-            echo "  ________     "
-            echo " |        |    "
-            echo " |        0    "
-            echo " |             "
-            echo " |             "
-            echo " |             "
+            echo "  ___________"
+            echo "  |         |"
+            echo "  O         |"
+            echo "            |"
+            echo "            |"
+            echo "            |"
+            echo "            |"
             ;;
         2)
-            echo "  ________     "
-            echo " |        |    "
-            echo " |        0    "
-            echo " |        |    "
-            echo " |             "
-            echo " |             "
+            echo "  ___________"
+            echo "  |         |"
+            echo "  O         |"
+            echo "  |         |"
+            echo "            |"
+            echo "            |"
+            echo "            |"
             ;;
         3)
-            echo "  ________     "
-            echo " |        |    "
-            echo " |        0    "
-            echo " |       /|    "
-            echo " |             "
-            echo " |             "
+            echo "  ___________"
+            echo "  |         |"
+            echo "  O         |"
+            echo " /|         |"
+            echo "            |"
+            echo "            |"
+            echo "            |"
             ;;
         4)
-            echo "  ________     "
-            echo " |        |    "
-            echo " |        0    "
-            echo " |       /|\\  "
-            echo " |             "
-            echo " |             "
+            echo "  ___________"
+            echo "  |         |"
+            echo "  O         |"
+            echo " /|\\        |"
+            echo "            |"
+            echo "            |"
+            echo "            |"
             ;;
         5)
-            echo "  ________     "
-            echo " |        |    "
-            echo " |        0    "
-            echo " |       /|\\  "
-            echo " |       /     "
-            echo " |             "
+            echo "  ___________"
+            echo "  |         |"
+            echo "  O         |"
+            echo " /|\\        |"
+            echo " /          |"
+            echo "            |"
+            echo "            |"
             ;;
         6)
-            echo "  ________     "
-            echo " |        |    "
-            echo " |        0    "
-            echo " |       /|\\  "
-            echo " |       / \\  "
-            echo " |             "
+            echo "  ___________"
+            echo "  |         |"
+            echo "  O         |"
+            echo " /|\\        |"
+            echo " / \\        |"
+            echo "            |"
+            echo "            |"
             ;;
     esac
 }
 
-# Función para comprobar si se ha adivinado la palabra
-adivinado() {
-    if [[ $palabra == $palabra_adivinada ]]; then
-        mostrar_estado
-        echo "¡Felicidades! ¡Has adivinado la palabra: '$palabra'!"
-        exit 0
+# Función para seleccionar una palabra aleatoriamente de una categoría
+function seleccionar_palabra {
+    categoria=$1
+    case $categoria in
+        "frutas_y_verduras")
+            palabras=("manzana" "platano" "zanahoria" "sandía" "uva" "naranja" "melon" "fresa" "mango")
+            ;;
+        "paises_y_capitales")
+            palabras=("españa:madrid" "francia:parís" "italia:roma" "méxico:ciudad de méxico" "alemania:berlín")
+            ;;
+        "canciones_de_jose_jose")
+            palabras=("el triste" "40 y 20" "amar y querer" "al amanecer" "mi vida" "la nave del olvido" "una mañana" "almohada" "no me digas que te vas" "volcan" "preso")
+            ;;
+        "peliculas_famosas")
+            palabras=("titanic" "star wars" "avatar" "matrix" "forrest gump" "parasitos" "toy story" "el viaje de chihiro" "el laberinto del fauno" "el padrino" "jurassic park" "john wick")
+            ;;
+    esac
+    palabra=${palabras[RANDOM % ${#palabras[@]}]}
+    IFS=':' read -ra partes <<< "$palabra"
+    palabra=${partes[0]}
+    espacios=$(echo "$palabra" | sed 's/./_/g')
+}
+
+# Función principal del juego
+function juego {
+    clear
+    echo -e "${GREEN}¡Bienvenido al Juego del Ahorcado!${NC}"
+    echo -e "${YELLOW}Selecciona una categoría:${NC}"
+    echo "1) Frutas y Verduras"
+    echo "2) Países y Capitales"
+    echo "3) Canciones de José José"
+    echo "4) Películas Famosas"
+
+    read -p "Ingresa el número de la categoría: " categoria
+
+    case $categoria in
+        1)
+            seleccionar_palabra "frutas_y_verduras"
+            ;;
+        2)
+            seleccionar_palabra "paises_y_capitales"
+            ;;
+        3)
+            seleccionar_palabra "canciones_de_jose_jose"
+            ;;
+        4)
+            seleccionar_palabra "peliculas_famosas"
+            ;;
+        *)
+            echo -e "${RED}Categoría no válida. Por favor, elige una opción válida.${NC}"
+            juego
+            ;;
+
+    esac
+    palabra=${palabras[RANDOM % ${#palabras[@]}]}
+    IFS=':' read -ra partes <<< "$palabra"
+    palabra=${partes[0]}
+    espacios=${palabra//[^ ]/_}
+
+
+    while [[ $intentos -lt 7 && "$espacios" != "$palabra" ]]; do
+        mostrar_ahorcado $intentos
+        echo -e "${YELLOW}Palabra: ${NC}$espacios"
+        echo -e "${YELLOW}Letras Adivinadas: ${NC}$letras_adivinadas"
+        echo -e "${YELLOW}Letras Fallidas: ${NC}$letras_fallidas"
+        read -p "Adivina una letra: " letra
+
+        if [[ "$palabra" == *"$letra"* ]]; then
+            for ((i = 0; i < ${#palabra}; i++)); do
+                if [ "${palabra:$i:1}" == "$letra" ]; then
+                    espacios="${espacios:0:$i}$letra${espacios:$i+1}"
+                fi
+            done
+            letras_adivinadas="$letras_adivinadas$letra "
+        else
+            letras_fallidas="$letras_fallidas$letra "
+            intentos=$((intentos + 1))
+        fi
+    done
+
+    mostrar_ahorcado $intentos
+    if [ "$espacios" == "$palabra" ]; then
+        echo -e "${GREEN}¡Iralo namás! Has adivinado la palabra brodi: $palabra${NC}"
+    else
+        echo -e "${RED}¡Chale mano, estaba rrequete fácil! La palabra era: $palabra${NC}"
     fi
 }
 
-# Bucle principal del juego
-while [[ $intentos -lt $max_intentos ]]; do
-    mostrar_estado
-
-    echo -n "Ingresa una letra: "
-    read letra
-
-    if [[ ${#letra} -ne 1 ]]; then
-        echo "Por favor, ingresa una sola letra."
-        continue
-    fi
-
-    if [[ $palabra =~ $letra ]]; then
-        palabra_adivinada=$(echo "$palabra" | sed "s/[^$letra ]/_/g")
-        adivinado
-    else
-        intentos=$((intentos + 1))
-        letras_erroneas="$letras_erroneas $letra"
-    fi
-done
-
-mostrar_estado
-echo "¡Oh no! Te has quedado sin intentos. La palabra era '$palabra'."
+# Iniciar el juego
+juego

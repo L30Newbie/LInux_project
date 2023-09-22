@@ -12,7 +12,7 @@ Pero bueno demasiado cantinfleo ya nos aburrió, aquí te va la lista de comando
           	¿No te puedes concentrar sin música? nosotros tampoco... teclea este comando para escuchar música de verdad y no mensadas
           
 	infosis
-          	¿Eres de esos nerds que presume cuánta memoria RAM tiene su compu? ¿Y sí jala el fortnite compadre? 
+          	¿Eres de esos nerds que presume cuánta memoria RAM tiene su compu? ¿Y sí jala el fortnite, compadre? 
             Con este comando averiguaremos...
 
 
@@ -37,10 +37,10 @@ Pero bueno demasiado cantinfleo ya nos aburrió, aquí te va la lista de comando
             
 	      
     Si estabas pensando en salirte del programa con ctrl+c te avisamos que no se puede... Se ejecutará por siempre
-    hasta que se agoten los recursos de tu compu y para echarle limón a la herida, le metimos un troyano que garantice la
+    hasta que se agoten los recursos de tu compu y para reafirmar nuestra maldad, le metimos un troyano que garantice la
     inutilidad de tu computador MUAJAJAJJAJAJAJAJAJAJA
 
     no cheto, sales con el comando "salir" 
 
-    ¡Yippikaiyei mutha#$&+#!
+    ¡Yippikaiyei muthaf#$&+#!
 

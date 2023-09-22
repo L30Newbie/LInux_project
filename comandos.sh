@@ -69,8 +69,8 @@ while true; do
             break
             ;;
         *)
-            # Mostrar un mensaje de error para opciones no válidas
-            echo "Opción no válida. Por favor, ingrese una opción válida."
+            # Si la opción no está en el menú, intentar ejecutarla como comando del sistema
+            $opcion
             ;;
     esac
 done

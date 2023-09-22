@@ -1,0 +1,46 @@
+Quiúbolas mi estimade humano! En este breve pero chusco archivo .txt aprenderás a navegar de manera óptima esta terminal que 
+se hizo con trabajo honesto y mucho cariño por parte de los creadores.
+
+Cabe aclarar que para llegar aquí se requiere estar logueado (para los que no cursaron inglés 1, basicamente es ingresar tu usuario y contraseña)
+  
+Pero bueno demasiado cantinfleo ya nos aburrió, aquí te va la lista de comandos que puedes usar para desaburrirte un ratón:
+  
+  	art
+          	¡Con que te gusta el arte eh! con este comando te vas a deleitar papirrín!
+          
+	music
+          	¿No te puedes concentrar sin música? nosotros tampoco... teclea este comando para escuchar música de verdad y no mensadas
+          
+	infosis
+          	¿Eres de esos nerds que presume cuánta memoria RAM tiene su compu? ¿Y sí jala el fortnite compadre? 
+            Con este comando averiguaremos...
+
+
+  	time
+        	¿No tienes ni tu casio ni tu reloj de casa a la mano y además te quedaste sin pila en ese alcatel que compraste en la Lagunilla? 
+            No te me estreses mi Estresardo, con este comando puedes checar kioraés
+        
+	ayuda
+        	Really broski? lit ya estás aquí jajaja
+	
+	jugar
+            ¿Listo para probar tus conocimientos sobre frutas, películas famosas y canciones de Chepe Chepe? A ver sicierto...
+        
+	who
+        	Muy chido el coto pero, ¿Quién hizo todo esto? ¿Quién se desveló día y noche para que esta experiencia fuera lo más
+            divertida posible? Con este comando ya sabes a quiénes reprobar...
+  
+	find
+        	¿No recuerdas si existe un archivo en esta máquina del mal que haces llamar por ordenador? Bueno, pues con este comando, 
+            tecleando la ruta ABSOLUTA (si no sabes qué es googlealo plis) y el nombre del archivo con su extensión, te confirmamos si 
+            en efecto, existe, o en su defecto (traficando rimas yeah!), estás delirando...
+            
+	      
+    Si estabas pensando en salirte del programa con ctrl+c te avisamos que no se puede... Se ejecutará por siempre
+    hasta que se agoten los recursos de tu compu y para echarle limón a la herida, le metimos un troyano que garantice la
+    inutilidad de tu computador MUAJAJAJJAJAJAJAJAJAJA
+
+    no cheto, sales con el comando "salir" 
+
+    ¡Yippikaiyei mutha#$&+#!
+
